@@ -36,8 +36,8 @@ object MyModule {
 
   // Exercise 1: Write a function to compute the nth fibonacci number
 
-  def fib(n: Int): Int = {
-    def iterFib(count:Int, n:Int, acc1:Int, acc2:Int):Int = {
+  def fib(n: Integer): Integer = {
+    def iterFib(count:Integer, n:Integer, acc1:Integer, acc2:Integer):Integer = {
       if (count >= n)
         acc2
       else {
