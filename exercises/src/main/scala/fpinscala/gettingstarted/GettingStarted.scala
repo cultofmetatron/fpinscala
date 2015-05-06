@@ -133,6 +133,13 @@ object MonomorphicBinarySearch {
 
 object PolymorphicFunctions {
 
+  def main(args: Array[String]): Unit = {
+    println("it was")
+    println(isSorted(Array(1, 2, 4, 10, 12, 13), (x:Int, y:Int) => {
+      x > y
+    }))
+  }
+
   // Here's a polymorphic version of `binarySearch`, parameterized on
   // a function for testing whether an `A` is greater than another `A`.
   def binarySearch[A](as: Array[A], key: A, gt: (A,A) => Boolean): Int = {
@@ -153,7 +160,22 @@ object PolymorphicFunctions {
 
   // Exercise 2: Implement a polymorphic function to check whether
   // an `Array[A]` is sorted
-  def isSorted[A](as: Array[A], gt: (A,A) => Boolean): Boolean = ???
+  def isSorted[A](as: Array[A], gt: (A,A) => Boolean): Boolean = {
+    @annotation.tailrec
+    def go(index:Int, head: A, tail: Array[A]):Boolean = {
+      if (index == tail.length) true
+      else
+        if (gt(head,tail(index)))
+          false
+        else
+          go(index +  1, tail(index), tail)
+    }
+    if (as.length <= 1)
+      true
+    else
+      go(1, as(0), as)
+  }
+
 
   // Polymorphic functions are often so constrained by their type
   // that they only have one implementation! Here's an example:
