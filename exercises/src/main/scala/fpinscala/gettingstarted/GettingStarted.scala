@@ -133,6 +133,13 @@ object MonomorphicBinarySearch {
 
 object PolymorphicFunctions {
 
+  def main(args: Array[String]): Unit = {
+    println("it was")
+    println(isSorted(Array(1, 2, 4, 10, 12, 13), (x:Int, y:Int) => {
+      x > y
+    }))
+  }
+
   // Here's a polymorphic version of `binarySearch`, parameterized on
   // a function for testing whether an `A` is greater than another `A`.
   def binarySearch[A](as: Array[A], key: A, gt: (A,A) => Boolean): Int = {
