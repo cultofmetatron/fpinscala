@@ -138,6 +138,19 @@ object PolymorphicFunctions {
     println(isSorted(Array(1, 2, 4, 10, 12, 13), (x:Int, y:Int) => {
       x > y
     }))
+    def add(a:Int, b:Int):Int = {
+      a + b
+    }
+
+    val fifteen = curry(add)(5)(10)
+    println(fifteen)
+    var add2 = uncurry(curry(add))
+    println(add2(2, 2))
+
+    def add1(a:Int) = 1 + a
+    
+    println(compose(add1, add1)(1)) // 3
+
   }
 
   // Here's a polymorphic version of `binarySearch`, parameterized on
@@ -188,13 +201,13 @@ object PolymorphicFunctions {
   // Note that `=>` associates to the right, so we could
   // write the return type as `A => B => C`
   def curry[A,B,C](f: (A, B) => C): A => (B => C) =
-    ???
+    (a: A) => (b: B) => f(a, b)
 
   // NB: The `Function2` trait has a `curried` method already
 
   // Exercise 4: Implement `uncurry`
   def uncurry[A,B,C](f: A => B => C): (A, B) => C =
-    ???
+    (a:A, b:B) => f(a)(b)
 
   /*
   NB: There is a method on the `Function` object in the standard library,
@@ -209,5 +222,5 @@ object PolymorphicFunctions {
   // Exercise 5: Implement `compose`
 
   def compose[A,B,C](f: B => C, g: A => B): A => C =
-    ???
+    (a) => f(g(a))
 }
