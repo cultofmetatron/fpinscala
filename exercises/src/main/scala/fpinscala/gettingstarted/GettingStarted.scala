@@ -149,7 +149,7 @@ object PolymorphicFunctions {
 
     def add1(a:Int) = 1 + a
     
-    println(compose(add1, add1)(1)) // 3
+    println(compose(add1, add1)(1))
 
   }
 
